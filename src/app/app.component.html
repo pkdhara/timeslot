@@ -1,0 +1,16 @@
+<nav class="navbar">
+  <ul class="nav">
+    <li role="presentation"><a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+        routerLink="/">Home</a></li>
+    <li role="presentation"><a class="nav-link" routerLinkActive="active" routerLink="about"> About Us </a></li>
+    <li role="presentation"><a *ngIf="currentUser.role!==undefined" class="nav-link" routerLinkActive="active" routerLink="view"> View Employees </a></li>
+    <li role="presentation"><a *ngIf="currentUser.role=='ROLE_ADMIN'" class="nav-link" routerLinkActive="active" routerLink="register">Registered Users</a></li>
+  </ul>
+  <ul class="nav navbar-right">
+    <li role="presentation"><a *ngIf="currentUser.role===undefined" class="nav-link" routerLinkActive="active" routerLink="login"> Login </a></li>
+    <li role="presentation"><a *ngIf="currentUser.role!==undefined" class="nav-link" routerLinkActive="active" routerLink="logout"> Logout </a></li>
+  </ul>
+</nav>
+<div class="container-fluid p-0">
+  <router-outlet></router-outlet>
+</div>

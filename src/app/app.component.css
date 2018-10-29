@@ -1,0 +1,15 @@
+.navbar {
+    background: gray;
+}
+
+.nav-link{
+    color:aliceblue!important;
+    font-weight: bold;
+}
+ul.nav a:hover { 
+    background: black; 
+}
+
+.active {
+    background: green;
+}

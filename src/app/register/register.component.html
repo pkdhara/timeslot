@@ -1,0 +1,77 @@
+<div class="container offset-sm-2">
+  <form (ngSubmit)="onSubmit()" #empForm="ngForm">
+    <div class="offset-sm-3"><h2>Registration</h2></div>
+    <div class="form-group">
+      <label for="name" class="col-md-10 control-label">Name</label>
+      <div class="col-sm-9">
+        <input type="text" name="name" placeholder="Enter Name" class="form-control" ngModel autofocus required #name="ngModel"  pattern="^([A-Za-z]+[.]?[ ]?|[A-Za-z]+?)+$">
+        <span class="warning" *ngIf="!name.valid && name.touched">Invalid Name</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="birthDate" class="col-sm-3 control-label">Date of Birth*</label>
+      <div class="col-sm-9">
+        <input type="date" max="{{dtmax | date:'yyyy-MM-dd'}}" name="dob" class="form-control" ngModel>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="address" class="col-sm-3 control-label">Address</label>
+      <div class="col-sm-9">
+        <textarea name="address" rows="3" class="form-control" ngModel></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="city" class="col-sm-3 control-label" pattern="^([A-Za-z]+[.]?[ ]?|[A-Za-z]+?)+$">City</label>
+      <div class="col-sm-9">
+        <input type="text" placeholder="Enter City" name="city" ngModel class="form-control" pattern="^([A-Za-z]+[.]?[ ]?|[A-Za-z]+?)+$" #city="ngModel">
+        <span class="warning" *ngIf="!city.valid && city.touched">Invalid City Name</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="salary" class="col-sm-3 control-label">Salary</label>
+      <div class="col-sm-9">
+        <input type="text" placeholder="Enter Salary" name="salary" ngModel class="form-control" #salary="ngModel" pattern='^[0-9]*$'>
+        <span class="warning" *ngIf="!salary.valid && salary.touched">Salary must only contain digits</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="department" class="col-sm-3 control-label">Select department:</label>
+      <div class="col-sm-9">
+        <select id ="department" class="form-control" name="department" ngModel>
+          <option value="Developer">Developer</option>
+          <option value="Tester">Tester</option>
+          <option value="Designer">Designer</option>
+          <option value="Accounts">Accounts</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email" class="col-sm-3 control-label">Email* </label>
+      <div class="col-sm-9">
+        <input type="email" id="email" placeholder="Email" ngModel class="form-control" name="email" email required #email="ngModel" pattern="^[A-Za-z0-9._%+-]+@argusoft.(com|in)$">
+        <span class="warning" *ngIf="!email.valid && email.touched">Email is not in proper format (ex: abc@argusoft.com or .in )</span>
+        
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password" class="col-sm-3 control-label">Password*</label>
+      <div class="col-sm-9">
+        <input type="password" name="password" placeholder="Password" [(ngModel)]="password" class="form-control" #pass="ngModel" (input)="checkPassword($event)" 
+         required>
+        <span class="warning">{{ passWarning }}</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password" class="col-sm-3 control-label">Confirm Password*</label>
+      <div class="col-sm-9">
+        <input type="password" name="confirmPassword" placeholder="Password" ngModel class="form-control" #cpass="ngModel" 
+        required (input)="checkConfirmPassword($event)" >
+        <span class="warning">{{ confirmPassWarning }}</span>
+      </div>
+    </div>
+    <div class="col-sm-9 offset-sm-2">
+      <button type="reset" class="btn btn-sm">Reset</button> &nbsp;
+      <button type="submit" [disabled]="!empForm.valid" class="btn btn-primary">Register</button>
+    </div>
+  </form> 
+</div> 

@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="id">Id</th>
+            <th scope="name">Name</th>
+            <th scope="dob">DOB</th>
+            <th scope="address">Address</th>
+            <th scope="city">City</th>
+            <th scope="salary">Salary</th>
+            <th scope="email">Email</th>
+            <th scope="department">Department</th>
+          </tr>
+        </thead>
+        <tr *ngFor="let emp of employees">
+          <th><span>{{ emp.id }}</span></th>
+          <td><span *ngIf="editRowId != emp.id">{{ emp.name }}</span>
+            <input *ngIf="editRowId == emp.id" class="form-control" [(ngModel)]="emp.name"></td>
+          <td><span *ngIf="editRowId != emp.id">{{emp.dob}}</span>
+            <input type="date" max="{{dtmax | date:'yyyy-MM-dd'}}" name="dob" *ngIf="editRowId == emp.id" class="form-control" [(ngModel)]="emp.dob"></td>
+          <td><span *ngIf="editRowId != emp.id">{{ emp.address }}</span>
+            <input *ngIf="editRowId == emp.id" class="form-control" [(ngModel)]="emp.address"></td>
+          <td><span *ngIf="editRowId != emp.id">{{ emp.city }}</span>
+            <input *ngIf="editRowId == emp.id" class="form-control" [(ngModel)]="emp.city"></td>
+          <td><span *ngIf="editRowId != emp.id">{{ emp.salary }}</span>
+            <input *ngIf="editRowId == emp.id" class="form-control" [(ngModel)]="emp.salary"></td>
+          <td><span *ngIf="editRowId != emp.id">{{emp.email}}</span>
+            <input *ngIf="editRowId == emp.id" class="form-control" [(ngModel)]="emp.email"></td>
+          <td><span *ngIf="editRowId != emp.id">{{ emp.department }}</span>
+            <select id ="department" class="form-control" name="department" *ngIf="editRowId == emp.id" [(ngModel)]="emp.department">
+                <option value="Developer">Developer</option>
+                <option value="Tester">Tester</option>
+                <option value="Designer">Designer</option>
+                <option value="Accounts">Accounts</option>
+              </select></td>
+          <td>
+            <button (click)="editRowId=emp.id" *ngIf="editRowId != emp.id" [hidden]="loggedInUser.role!='ROLE_ADMIN'" class="btn btn-primary" style="width:80px" [disabled] = "editRowId != null">
+              <span>Update</span> 
+            </button>
+            <button *ngIf="editRowId == emp.id" (click)="editRowId = null;updateRow(emp)" class="btn btn-default btn-sm" style="width:80px ; background-color:#4CAF50; ; color:aliceblue">Save</button>
+          </td>
+          <td>
+            <button class="btn btn-danger" *ngIf="editRowId != emp.id" (click)="deleteRow(emp.id)" style="width:80px" [disabled] = "editRowId != null" [hidden]="loggedInUser.role!='ROLE_ADMIN'">
+              <span>Delete</span></button>
+              <button *ngIf="editRowId == emp.id" (click)="editRowId = null" class="btn btn-default">Cancel</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

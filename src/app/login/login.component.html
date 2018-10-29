@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="card card-container">
+        
+        <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+        <p id="profile-name" class="profile-name-card"></p>
+        <form class="form-signin" (ngSubmit)="onSubmit()">
+            <span id="reauth-email" class="reauth-email"></span>
+            <input type="email" name="email" class="form-control" placeholder="Email address"  autofocus email [(ngModel)]="login.email" #email="ngModel"
+            pattern="^[A-Za-z0-9._%+-]+@argusoft.(com|in)$" required>
+            <span class="warning" *ngIf="!email.valid && email.touched">Email is not in proper format (ex: abc@argusoft.com or .in )</span>
+            <input type="password" name="password" class="form-control" placeholder="Password" required [(ngModel)]="login.password" #password="ngModel" required>
+            <span class="warning" *ngIf="!password.valid && password.touched">Enter Password</span>
+            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+        </form>
+        <button class="forgot-password btn" (click)="onForgotPassword()">
+            Forgot the password?
+        </button>
+        <p style="color:green">{{ status }}</p>
+        <p style="color: red">{{ errorMessage }}</p>
+        <app-loading></app-loading>
+    </div>
+</div>
